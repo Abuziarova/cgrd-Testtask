@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>cgrd Testtask - Backend</title>
+    <link rel="stylesheet" href="../style/base.css">
 </head>
 <body>
-<div class="maintenance-container">
-<h1>Dupa</h1>
+<div class="flex-container">
+    <div class="logo-image">
+        <img src="../images/logo.svg" alt="Logo">
+    </div>
 </div>
+
+<div class="flex-container">
+    {% include 'login.html.twig' %}
+</div>
+
 </body>
 </html>
