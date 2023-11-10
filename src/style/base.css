@@ -1,7 +1,11 @@
+@import "login.css";
+
 body {
-    background: url("../images/waves.jpeg") no-repeat center fixed;
+    background-color: rgba(8, 49, 79, 0.59);
+    background: url(../images/waves.svg) no-repeat center fixed;
     background-size: 100% 100%;
 }
+
 .flex-container {
     display: flex;
     justify-content: center;
@@ -13,9 +17,4 @@ body {
 
 .logo-image img {
     width: 120px;
-}
-
-.login-form {
-    min-width: 500px;
-    background-color: aqua;
 }

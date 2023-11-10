@@ -1,0 +1,29 @@
+.login-form {
+    min-width: 500px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #eae9e9;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #16396b;
+    background-color : #f8f7f7;
+}
+button[type=submit] {
+    width: 100%;
+    background-color: #16396b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+}
+
+::placeholder {
+    color: #16396b;
+    opacity: 0.7; /* Firefox */
+}
