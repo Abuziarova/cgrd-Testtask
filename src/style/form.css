@@ -28,3 +28,16 @@
     color: #16396b;
     opacity: 0.7; /* Firefox */
 }
+
+.error-message {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ffc3c3;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #d47575;
+    background-color : #fff0f0;
+    text-align: center;
+}

@@ -11,21 +11,6 @@ use Twig\Loader\FilesystemLoader;
 
 $request = $_SERVER['REQUEST_URI'];
 $routeDir = '/route/';
-var_dump($request);
-switch ($request) {
-    case '/':
-        require __DIR__ . $routeDir. 'login.php';
-        break;
-
-    case '/logout':
-        require __DIR__ . $routeDir. 'logout.php';
-        break;
-
-    default:
-        http_response_code(404);
-        require __DIR__ . $routeDir. '404.php';
-}
-
 
 $loader = new FilesystemLoader(__DIR__ . '/view');
 $twig = new Environment($loader);
@@ -36,7 +21,7 @@ if (isset($_SESSION['login_user'])) {
     $logged = true;
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if($_SERVER["REQUEST_METHOD"] === "POST") {
     $connection = new DatabaseConnection();
     $db = $connection->getDbConnection();
     $myusername = mysqli_real_escape_string($db,$_POST['login']);
@@ -49,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['login_user'] = $myusername;
         $logged = true;
     }else {
-        $errorMessage = "Your Login Name or Password is invalid";
+        $errorMessage = "Wrong Login Data!";
     }
 }
 echo $twig->render('main.html.twig', ['logged' => $logged, 'errorMessage' => $errorMessage]);
