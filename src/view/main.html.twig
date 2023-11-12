@@ -12,9 +12,16 @@
     </div>
 </div>
 
-<div class="flex-container">
-    {% include 'login.html.twig' %}
-</div>
+{% if logged %}
+    <div class="flex-container">
+        {% include 'admin.html.twig' %}
+    </div>
+{% else %}
+    <div class="flex-container">
+        {% include 'login.html.twig' %}
+    </div>
+{% endif %}
+
 
 </body>
 </html>

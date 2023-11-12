@@ -11,9 +11,10 @@
     border-radius: 4px;
     box-sizing: border-box;
     color: #16396b;
-    background-color : #f8f7f7;
+    background-color : rgba(248, 247, 247, .5)
+;
 }
-button[type=submit] {
+.button {
     width: 100%;
     background-color: #16396b;
     color: white;

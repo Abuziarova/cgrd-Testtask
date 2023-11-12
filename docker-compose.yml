@@ -12,11 +12,13 @@
         - mysql
     mysql:
       image: mysql:latest
+      ports:
+        - 3306:3306
       environment:
-        MYSQL_ROOT_PASSWORD: secret
-        MYSQL_DATABASE: mydatabase
-        MYSQL_USER: myuser
-        MYSQL_PASSWORD: mypassword
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: database
+        MYSQL_USER: app
+        MYSQL_PASSWORD: app
       volumes:
         - mysql_data:/var/lib/mysql
   volumes:
