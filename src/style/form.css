@@ -41,3 +41,7 @@
     background-color : #fff0f0;
     text-align: center;
 }
+
+textarea {
+    resize: vertical
+}
