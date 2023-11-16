@@ -1,6 +1,22 @@
-<div>
-    <div id="news">
-    </div>
+<div class="admin">
+    {% if news %}
+        <h3> News </h3>
+      {%  for n in news %}
+          <div class="news">
+              <div>
+                  <b> {{ n.title }}</b>  <span class="description">{{ n.description }}</span>
+              </div>
+              <div>
+                  <img class="edit" src="../images/pencil.svg" alt="">
+                  <img class="delete" src="../images/close.svg" alt="">
+              </div>
+
+          </div>
+
+      {% endfor %}
+    {%  endif %}
+
+
     <h3> Create News </h3>
     <form id="addNews" action="../action/news.php">
         <input class="form-input" type="text" name="title" placeholder="Title">

@@ -45,3 +45,29 @@
 textarea {
     resize: vertical
 }
+.description {
+    margin: 15px;
+}
+
+.news {
+    padding: 12px 5px 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #eae9e9;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #16396b;
+    background-color : rgba(248, 247, 247, .5);
+    display: inline-grid;
+    grid-template-columns: 90% 10%;
+}
+.admin {
+    width:50%
+}
+.edit, .delete {
+    width: 20%;
+    padding:5px;
+}
+
+.action {
+
+}

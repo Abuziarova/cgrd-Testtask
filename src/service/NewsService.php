@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-include "DatabaseService.php";
-
-include "../model/News.php";
+include_once "DatabaseService.php";
+include "NewsModel.php";
 class NewsService
 {
     private $databaseService;
     public function __construct() {
+
         $this->databaseService = new DatabaseService();
     }
 
@@ -17,9 +17,7 @@ class NewsService
        if (!$title || !$description) {
            $responseData =['success' => false, 'message' => 'Missing data'];
        } else {
-           $news = new News;
-           $news->setTitle($title);
-           $news->setDescription($description);
+           $news = new NewsModel(null, $title, $description);
            try {
                $this->databaseService->createNews($news);
            } catch (Exception $exception) {
@@ -46,5 +44,16 @@ class NewsService
     {
         header('Content-Type: application/json; charset=utf-8');
         return json_encode($data);
+    }
+
+    public function getNews()
+    {
+        $newsData = [];
+        $data = $this->databaseService->getAllNews();
+        foreach ($data as $news) {
+            $newsData[] =  new NewsModel((int)$news['id'], $news['title'], $news['description']);
+        }
+
+        return $newsData;
     }
 }
