@@ -4,26 +4,18 @@ $(document).ready(function () {
 
         e.preventDefault();
 
-        const formData = $(this).serializeArray();
-        formData.push({name: 'method', value: 'add'})
         var actionUrl = $(this).attr('action');
         $.ajax({
             type: "POST",
             url: actionUrl,
-            data: formData,
+            data: $(this).serializeArray(),
             success: function (data) {
                 if (data.success) {
-                    AppendNews(formData)
+                    sessionStorage.setItem("successMessage","sdfsdf");
+                    window.location.reload()
                 }
-            },
-            error: function () {
-                console.log('error');
             }
         });
     });
-
-    function AppendNews(formData) {
-        console.log(formData)
-    }
 
 });

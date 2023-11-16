@@ -9,13 +9,11 @@ $newsService = new NewsService();
 
 switch ($_POST['method']) {
     case 'add':
-        echo $newsService->add($_POST['title'], $_POST['description']);
-        break;
+        return $newsService->add($_POST['title'], $_POST['description']);
     case 'edit':
-        echo $newsService->edit($_POST['id'], $_POST['title'], $_POST['description']);
-        break;
+        return $newsService->edit($_POST['id'], $_POST['title'], $_POST['description']);
     case 'delete':
-        echo $newsService->delete($_POST['id']);
+        return $newsService->delete($_POST['id']);
 }
 
 

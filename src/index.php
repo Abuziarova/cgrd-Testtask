@@ -18,8 +18,6 @@ $twig = new Environment($loader);
 
 $errorMessage = null;
 $logged = false;
-
-
 if (isset($_SESSION['login_user'])) {
     $logged = true;
 }
@@ -38,6 +36,12 @@ if($logged) {
     $veiwVariables ['news'] = $newsService->getNews();
 }
 
+if (isset($_SESSION['success_message'])) {
+    $veiwVariables['successMessage'] = $_SESSION['success_message'];
+}
+
 echo $twig->render('main.html.twig', $veiwVariables);
+
+$_SESSION['success_message'] = null;
 
 

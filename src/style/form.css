@@ -59,6 +59,7 @@ textarea {
     background-color : rgba(248, 247, 247, .5);
     display: inline-grid;
     grid-template-columns: 90% 10%;
+    width: 100%;
 }
 .admin {
     width:50%
@@ -68,6 +69,15 @@ textarea {
     padding:5px;
 }
 
-.action {
-
+.success-message {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ecffda;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #6aa92a;
+    background-color : #f6fff0;
+    text-align: center;
 }
