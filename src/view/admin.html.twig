@@ -2,7 +2,6 @@
 <div class="admin">
     {% if successMessage %}
         <div class="success-message">{{ successMessage }}</div>
-        {{ unsetSession }}
     {% endif %}
     {% if news %}
         <h3> News </h3>
@@ -15,15 +14,13 @@
                   <img class="edit" src="../images/pencil.svg" alt="edit" data-news-id="{{ n.id }}">
                   <img class="delete" src="../images/close.svg" alt="delete" data-news-id="{{ n.id }}">
               </div>
-
           </div>
-
       {% endfor %}
     {%  endif %}
 
 
     <h3> Create News </h3>
-    <form id="addNews" action="../action/create-news.php">
+    <form id="addNews" action="../action/news.php">
         <input name="method" type="hidden" value="add">
         <input class="form-input" type="text" name="title" placeholder="Title">
         <textarea class="form-input" type="text" name="description" placeholder="Description" rows="10"></textarea>

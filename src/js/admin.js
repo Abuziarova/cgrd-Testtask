@@ -1,21 +1,30 @@
 $(document).ready(function () {
-
     $("#addNews").submit(function (e) {
-
         e.preventDefault();
-
-        var actionUrl = $(this).attr('action');
         $.ajax({
             type: "POST",
-            url: actionUrl,
-            data: $(this).serializeArray(),
+            url: '../action/news.php',
+            data: $(this).serialize(),
+            complete: function (data) {
+                window.location.reload()
+            }
+        });
+    });
+
+    $(".delete").click(function (event) {
+        const requestData = {
+            id: $(event.target).data('newsId'),
+            method: 'delete'
+        }
+        $.ajax({
+            type: "POST",
+            url: '../action/news.php',
+            data: requestData,
             success: function (data) {
                 if (data.success) {
-                    sessionStorage.setItem("successMessage","sdfsdf");
                     window.location.reload()
                 }
             }
         });
     });
-
 });

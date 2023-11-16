@@ -43,6 +43,12 @@ class DatabaseService
         return mysqli_query($this->dbConnection, $sql);
     }
 
+    public function deleteNews($id)
+    {
+        $sql = sprintf("DELETE FROM news WHERE id = '%d'", $id);
+        return mysqli_query($this->dbConnection, $sql);
+    }
+
 }
 
 

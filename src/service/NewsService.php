@@ -33,10 +33,16 @@ class NewsService
         return $this->createResponse($data);
     }
 
-    public function delete(mixed $id)
+    public function delete(string $id)
     {
-        $data = ['success' => true, 'message' => 'The news were created'];
-        return $this->createResponse($data);
+        try {
+            $this->databaseService->deleteNews((int)$id);
+            $responseData = ['success' => true];
+        } catch (Exception $exception) {
+            $responseData = ['success' => false];
+        }
+
+        return $this->createResponse($responseData);
     }
 
     private function createResponse(array $data): string
