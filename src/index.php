@@ -6,7 +6,8 @@ require __DIR__ . '/vendor/autoload.php';
 include "service/LoginService.php";
 include "service/NewsService.php";
 
-
+use service\LoginService;
+use service\NewsService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 

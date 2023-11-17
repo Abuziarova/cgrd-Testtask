@@ -1,5 +1,12 @@
 <?php declare(strict_types=1);
 
+namespace service;
+
+use Exception;
+use model\NewsModel;
+use exception\DatabaseWritingException;
+use mysqli;
+
 class DatabaseService
 {
     private const SERVER = 'mysql';
@@ -27,40 +34,51 @@ class DatabaseService
         return mysqli_num_rows($result) === 1 ? $login : null;
     }
 
-    public function createNews(NewsModel $news)
+    public function createNews(NewsModel $news): bool
     {
         $sql = sprintf("INSERT INTO news(title, description) values('%s', '%s');",
             $news->getTitle(),
             $news->getDescription()
         );
-        mysqli_query($this->dbConnection, $sql);
+
+        return $this->handleQuery($sql, 'creating new news');
     }
 
     public function getAllNews(): object
     {
         $sql = "SELECT * from news;";
 
-        return mysqli_query($this->dbConnection, $sql);
+        return $this->handleQuery($sql, 'getting all news');
     }
 
-    public function deleteNews($id)
+    public function deleteNews($id): bool
     {
         $sql = sprintf("DELETE FROM news WHERE id = '%d'", $id);
-        return mysqli_query($this->dbConnection, $sql);
+
+        return $this->handleQuery($sql, 'deleting news', $id);
     }
 
-    public function editNews(int $id, string $title, string $description)
+    public function editNews(NewsModel $news): bool
     {
         $sql = sprintf(
             "UPDATE news SET title='%s', description='%s' where id = '%d'",
-            $title,
-            $description,
-            $id
+            $news->getTitle(),
+            $news->getDescription(),
+            $news->getId()
         );
 
-        return mysqli_query($this->dbConnection, $sql);
+        return $this->handleQuery($sql, 'updating news', $news->getId());
     }
 
+    public function handleQuery(string $sql, string $method , $id = null): bool|object
+    {
+        try {
+            $result = mysqli_query($this->dbConnection, $sql);
+            return $result;
+        } catch (Exception $exception) {
+            throw new DatabaseWritingException($exception->getMessage(), $method, $id);
+        }
+    }
 }
 
 

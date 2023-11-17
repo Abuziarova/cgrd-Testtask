@@ -1,7 +1,15 @@
 <?php declare(strict_types=1);
-session_start();
+
+namespace service;
+
+include '../exception/DatabaseWritingException.php';
+use model\NewsModel;
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include_once "DatabaseService.php";
-include "NewsModel.php";
+include "model/NewsModel.php";
 
 class NewsService
 {
@@ -15,47 +23,33 @@ class NewsService
     public function add(string $title, string $description): string
     {
         $news = new NewsModel(null, $title, $description);
-        try {
-            $this->databaseService->createNews($news);
-            $responseData = ['success' => true];
+        $this->databaseService->createNews($news);
+        $_SESSION['success_message'] = 'News was successfully created';
 
-            $_SESSION['success_message'] = 'News was successfully created';
-        } catch (Exception $exception) {
-            $responseData = ['success' => false];
-        }
-
-        return $this->createResponse($responseData);
+        return $this->createSuccessResponse();
     }
 
     public function edit(string $id, string $title, string $description): string
     {
-          if ($this->databaseService->editNews((int)$id, $title, $description)) {
-              $responseData = ['success' => true];
-              $_SESSION['success_message'] = 'News was successfully changed';
-          } else {
-              $responseData = ['success' => false];
-          }
+        $news = new NewsModel((int)$id, $title, $description);
+        $this->databaseService->editNews($news);
+        $_SESSION['success_message'] = 'News was successfully changed';
 
-        return $this->createResponse($responseData);
+        return $this->createSuccessResponse();
     }
 
     public function delete(string $id)
     {
-        try {
-            $this->databaseService->deleteNews((int)$id);
-            $responseData = ['success' => true];
-            $_SESSION['success_message'] = 'News was successfully deleted';
-        } catch (Exception $exception) {
-            $responseData = ['success' => false];
-        }
+        $this->databaseService->deleteNews((int)$id);
+        $_SESSION['success_message'] = 'News was successfully deleted';
 
-        return $this->createResponse($responseData);
+        return $this->createSuccessResponse();
     }
 
-    private function createResponse(array $data): string
+    private function createSuccessResponse(): string
     {
-//        header('Content-Type: application/json; charset=utf-8');
-        return json_encode($data);
+        header('Content-Type: application/json; charset=utf-8');
+        return json_encode(['success' => true]);
     }
 
     public function getNews()

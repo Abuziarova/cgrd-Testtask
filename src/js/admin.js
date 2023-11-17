@@ -5,8 +5,10 @@ $(document).ready(function () {
             type: "POST",
             url: '../action/news.php',
             data: $(this).serialize(),
-            complete: function () {
-                window.location.reload()
+            success: function (data) {
+                if (data.success) {
+                    window.location.reload()
+                }
             }
         });
     });
@@ -19,8 +21,10 @@ $(document).ready(function () {
             type: "POST",
             url: '../action/news.php',
             data: requestData,
-            complete: function () {
-                window.location.reload()
+            success: function (data) {
+                if (data.success) {
+                    window.location.reload()
+                }
             }
         });
     });

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-
+namespace model;
 class NewsModel
 {
     private ?int $id;
