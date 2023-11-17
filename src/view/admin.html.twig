@@ -4,13 +4,13 @@
         <div class="success-message">{{ successMessage }}</div>
     {% endif %}
     {% if news %}
-        <h3> News </h3>
+        <h3> All News </h3>
       {%  for n in news %}
           <div class="news">
               <div>
-                  <b> {{ n.title }}</b>  <span class="description">{{ n.description }}</span>
+                  <b class="title">{{ n.title }}</b>  <span class="description">{{ n.description }}</span>
               </div>
-              <div>
+              <div class="actions">
                   <img class="edit" src="../images/pencil.svg" alt="edit" data-news-id="{{ n.id }}">
                   <img class="delete" src="../images/close.svg" alt="delete" data-news-id="{{ n.id }}">
               </div>
@@ -18,10 +18,13 @@
       {% endfor %}
     {%  endif %}
 
+    <div class="form-header">
+        <h3 id="form-title"> Create News </h3>  <img id="cancel" class="delete" src="../images/close.svg" alt="delete" data-news-id="{{ n.id }}">
+    </div>
 
-    <h3> Create News </h3>
     <form id="addNews" action="../action/news.php">
         <input name="method" type="hidden" value="add">
+        <input name="id" type="hidden" value="0">
         <input class="form-input" type="text" name="title" placeholder="Title">
         <textarea class="form-input" type="text" name="description" placeholder="Description" rows="10"></textarea>
         <button class="button form-input" type="submit">Create</button>

@@ -49,6 +49,18 @@ class DatabaseService
         return mysqli_query($this->dbConnection, $sql);
     }
 
+    public function editNews(int $id, string $title, string $description)
+    {
+        $sql = sprintf(
+            "UPDATE news SET title='%s', description='%s' where id = '%d'",
+            $title,
+            $description,
+            $id
+        );
+
+        return mysqli_query($this->dbConnection, $sql);
+    }
+
 }
 
 

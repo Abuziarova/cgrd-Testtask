@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-
+session_start();
 include_once "DatabaseService.php";
 include "NewsModel.php";
 
@@ -18,8 +18,8 @@ class NewsService
         try {
             $this->databaseService->createNews($news);
             $responseData = ['success' => true];
-            session_start();
-            $_SESSION['success_message'] = 'News was Successfully created';
+
+            $_SESSION['success_message'] = 'News was successfully created';
         } catch (Exception $exception) {
             $responseData = ['success' => false];
         }
@@ -27,10 +27,16 @@ class NewsService
         return $this->createResponse($responseData);
     }
 
-    public function edit(mixed $id, mixed $title, mixed $description): string
+    public function edit(string $id, string $title, string $description): string
     {
-        $data = ['success' => true, 'message' => 'The news were created'];
-        return $this->createResponse($data);
+          if ($this->databaseService->editNews((int)$id, $title, $description)) {
+              $responseData = ['success' => true];
+              $_SESSION['success_message'] = 'News was successfully changed';
+          } else {
+              $responseData = ['success' => false];
+          }
+
+        return $this->createResponse($responseData);
     }
 
     public function delete(string $id)
@@ -38,6 +44,7 @@ class NewsService
         try {
             $this->databaseService->deleteNews((int)$id);
             $responseData = ['success' => true];
+            $_SESSION['success_message'] = 'News was successfully deleted';
         } catch (Exception $exception) {
             $responseData = ['success' => false];
         }
@@ -47,7 +54,7 @@ class NewsService
 
     private function createResponse(array $data): string
     {
-        header('Content-Type: application/json; charset=utf-8');
+//        header('Content-Type: application/json; charset=utf-8');
         return json_encode($data);
     }
 
