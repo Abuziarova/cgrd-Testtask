@@ -10,7 +10,9 @@ use service\NewsService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $loader = new FilesystemLoader(__DIR__ . '/view');
 $twig = new Environment($loader);
