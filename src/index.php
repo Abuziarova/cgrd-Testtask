@@ -11,6 +11,8 @@ use service\NewsService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+
+
 $request = $_SERVER['REQUEST_URI'];
 $routeDir = '/route/';
 
@@ -29,7 +31,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $logged = $errorMessage === null;
 }
 
-$veiwVariables = ['logged' => $logged, 'errorMessage' => $errorMessage];
+if(!isset($_SESSION["csrf_token"])) {
+    $token = bin2hex(random_bytes(16));
+    $_SESSION["csrf_token"] = $token;
+} else {
+    $token = $_SESSION["csrf_token"];
+}
+
+$veiwVariables = ['logged' => $logged, 'errorMessage' => $errorMessage, 'token' => $token];
 
 
 if($logged) {

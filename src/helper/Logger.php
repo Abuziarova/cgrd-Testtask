@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace helper;
+
 class Logger
 {
     public static function log(string $data) {

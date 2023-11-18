@@ -14,8 +14,9 @@ $(document).ready(function () {
     });
 
     $(".delete").click(function () {
+        const token = $('input[name="csrf_token"]').val()
         const requestData = {
-            id: $(this).data('newsId'), method: 'delete'
+            id: $(this).data('newsId'), method: 'delete', csrf_token: token
         }
         $.ajax({
             type: "POST",

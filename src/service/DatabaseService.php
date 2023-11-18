@@ -3,9 +3,9 @@
 namespace service;
 
 use Exception;
-use model\NewsModel;
-use exception\DatabaseWritingException;
 use mysqli;
+use service\exception\DatabaseWritingException;
+use service\model\NewsModel;
 
 class DatabaseService
 {

@@ -6,9 +6,15 @@ include "../service/NewsService.php";
 include "../helper/Logger.php";
 
 use Exception;
-use exception\DatabaseWritingException;
-use Logger;
+use helper\Logger;
+use service\exception\DatabaseWritingException;
 use service\NewsService;
+
+if ($_POST["csrf_token"] != $_SESSION["csrf_token"]) {
+    // Reset token
+    unset($_SESSION["csrf_token"]);
+    die("CSRF token validation failed");
+}
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST" || !array_key_exists('method', $_POST)) {
     return;

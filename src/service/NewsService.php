@@ -2,18 +2,19 @@
 
 namespace service;
 
-include '../exception/DatabaseWritingException.php';
-use model\NewsModel;
+include_once "DatabaseService.php";
+include "model/NewsModel.php";
+include "exception/DatabaseWritingException.php";
+
+use service\model\NewsModel;
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include_once "DatabaseService.php";
-include "model/NewsModel.php";
 
 class NewsService
 {
-    private $databaseService;
+    private DatabaseService $databaseService;
 
     public function __construct()
     {
