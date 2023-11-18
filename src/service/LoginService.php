@@ -4,7 +4,7 @@ namespace service;
 
 class LoginService
 {
-    private $databaseService;
+    private DatabaseService $databaseService;
     private ?string $errorMessage = null;
 
     public function __construct()
@@ -12,7 +12,7 @@ class LoginService
         $this->databaseService = new DatabaseService();
     }
 
-    public function login(string $login, string $password)
+    public function login(string $login, string $password): ?string
     {
         $userName = $this->databaseService->getUserByUserData($login, $password);
 

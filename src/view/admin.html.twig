@@ -20,16 +20,16 @@
     <div class="form-header">
         <h3 id="form-title"> Create News </h3>  <img id="cancel" class="delete" src="../images/close.svg" alt="delete" data-news-id="{{ n.id }}">
     </div>
-
     <form id="addNews" action="../action/news.php">
         <input name="method" type="hidden" value="add">
         <input name="csrf_token" type="hidden"  value={{ token }} />
         <input name="id" type="hidden" value="0">
         <input class="form-input" type="text" name="title" placeholder="Title">
-        <textarea class="form-input" type="text" name="description" placeholder="Description" rows="10"></textarea>
+        <textarea class="form-input" name="description" placeholder="Description" rows="10"></textarea>
         <button class="button form-input" type="submit">Create</button>
     </form>
-    <form action="../action/logout.php" method="get">
+    <form action="../action/logout.php" method="post">
+        <input name="csrf_token" type="hidden"  value={{ token }} />
         <button class="button form-input" type="submit">Logout</button>
     </form>
 </div>

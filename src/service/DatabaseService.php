@@ -13,8 +13,7 @@ class DatabaseService
     private const USERNAME = 'app';
     private const PASSWORD = 'app';
     private const DATABASE_NAME = 'database';
-
-    private $dbConnection;
+    private mysqli $dbConnection;
 
     public function __construct()
     {
@@ -51,7 +50,7 @@ class DatabaseService
         return $this->handleQuery($sql, 'getting all news');
     }
 
-    public function deleteNews($id): bool
+    public function deleteNews(int $id): bool
     {
         $sql = sprintf("DELETE FROM news WHERE id = '%d'", $id);
 

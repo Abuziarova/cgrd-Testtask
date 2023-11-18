@@ -7,7 +7,7 @@ class NewsModel
     private string $title;
     private string $description;
 
-    public function __construct($id, $title, $description)
+    public function __construct(?int $id, string $title, string $description)
     {
         if ($id) {
             $this->setId($id);

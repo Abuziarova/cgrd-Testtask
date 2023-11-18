@@ -2,11 +2,12 @@
 
 namespace service;
 
+use service\model\NewsModel;
+
 include_once "DatabaseService.php";
 include "model/NewsModel.php";
 include "exception/DatabaseWritingException.php";
 
-use service\model\NewsModel;
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -39,7 +40,7 @@ class NewsService
         return $this->createSuccessResponse();
     }
 
-    public function delete(string $id)
+    public function delete(string $id): string
     {
         $this->databaseService->deleteNews((int)$id);
         $_SESSION['success_message'] = 'News was successfully deleted';

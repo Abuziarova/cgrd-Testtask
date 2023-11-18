@@ -10,13 +10,13 @@ use helper\Logger;
 use service\exception\DatabaseWritingException;
 use service\NewsService;
 
-if ($_POST["csrf_token"] != $_SESSION["csrf_token"]) {
-    // Reset token
-    unset($_SESSION["csrf_token"]);
-    die("CSRF token validation failed");
+if ($_SERVER["REQUEST_METHOD"] !== "POST" || !array_key_exists('method', $_POST)) {
+    return;
 }
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST" || !array_key_exists('method', $_POST)) {
+if ($_POST["csrf_token"] != $_SESSION["csrf_token"]) {
+    unset($_SESSION["csrf_token"]);
+    Logger::log("CSRF token validation failed");
     return;
 }
 
@@ -34,11 +34,9 @@ try {
             echo $newsService->delete($_POST['id']);
             break;
     }
-} catch (DatabaseWritingException $e) {
+} catch (DatabaseWritingException | Exception $e) {
     Logger::log($e->getMessage());
     echo  json_encode(['success' => false]);
-} catch (Exception $e) {
-    echo 'Exception'.$e->getMessage();
 }
 
 

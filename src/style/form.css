@@ -1,3 +1,7 @@
+h3 {
+    color: #16396b;
+}
+
 .login-form, .admin {
     width: 50%;
     min-width: 500px;

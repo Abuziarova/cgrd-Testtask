@@ -1,26 +1,23 @@
 <?php declare(strict_types=1);
 
-session_start();
-
 require __DIR__ . '/vendor/autoload.php';
 include "service/LoginService.php";
 include "service/NewsService.php";
+include "helper/Logger.php";
 
 use service\LoginService;
 use service\NewsService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-
-
-$request = $_SERVER['REQUEST_URI'];
-$routeDir = '/route/';
+session_start();
 
 $loader = new FilesystemLoader(__DIR__ . '/view');
 $twig = new Environment($loader);
 
 $errorMessage = null;
 $logged = false;
+
 if (isset($_SESSION['login_user'])) {
     $logged = true;
 }
@@ -39,7 +36,6 @@ if(!isset($_SESSION["csrf_token"])) {
 }
 
 $veiwVariables = ['logged' => $logged, 'errorMessage' => $errorMessage, 'token' => $token];
-
 
 if($logged) {
     $newsService = new NewsService();
