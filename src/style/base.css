@@ -1,7 +1,8 @@
 @import "form.css";
 
 body {
-    background: rgba(8, 49, 79, 0.59) url(../images/waves.svg) no-repeat fixed center;
+    background-color: rgba(8, 49, 79, 0.59);
+    background: url(../images/waves.svg) no-repeat center fixed;
     background-size: 100% 100%;
 }
 

@@ -36,6 +36,7 @@ try {
     }
 } catch (DatabaseWritingException | Exception $e) {
     Logger::log($e->getMessage());
+    $_SESSION['error_message'] = 'Something went wrong. Please take a look at the log file ';
     echo  json_encode(['success' => false]);
 }
 

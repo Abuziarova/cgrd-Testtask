@@ -37,6 +37,10 @@ if(!isset($_SESSION["csrf_token"])) {
     $token = $_SESSION["csrf_token"];
 }
 
+if (isset($_SESSION['error_message'])) {
+    $errorMessage = $_SESSION['error_message'];
+}
+
 $veiwVariables = ['logged' => $logged, 'errorMessage' => $errorMessage, 'token' => $token];
 
 if($logged) {
@@ -51,5 +55,6 @@ if (isset($_SESSION['success_message'])) {
 echo $twig->render('main.html.twig', $veiwVariables);
 
 $_SESSION['success_message'] = null;
+$_SESSION['error_message'] = null;
 
 

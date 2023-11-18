@@ -12,7 +12,7 @@ class LoginService
         $this->databaseService = new DatabaseService();
     }
 
-    public function login(string $login, string $password): ?string
+    public function login(string $login, string $password)
     {
         $userName = $this->databaseService->getUserByUserData($login, $password);
 

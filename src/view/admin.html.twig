@@ -2,6 +2,9 @@
     {% if successMessage %}
         <div class="success-message">{{ successMessage }}</div>
     {% endif %}
+    {% if errorMessage %}
+        <div class="error-message">{{ errorMessage }}</div>
+    {% endif %}
     {% if news %}
         <h3> All News </h3>
       {%  for n in news %}
