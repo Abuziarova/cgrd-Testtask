@@ -50,6 +50,3 @@ mysql -h localhost -P 3306 --protocol=tcp -u app -D database -p < cgrd-Testtask.
 ```
 composer install
 ```
-
-
-In the database only one user 
